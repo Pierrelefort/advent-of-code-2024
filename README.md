@@ -47,3 +47,7 @@ Inputs should not be pushed to the repository, so they are ignored in the `.giti
     ├── input01a.txt
     └── input01b.txt
 ```
+
+## Total time spent
+
+- Total time spent: 2 hours 20 minutes

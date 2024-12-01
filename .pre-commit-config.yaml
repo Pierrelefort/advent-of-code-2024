@@ -1,4 +1,23 @@
 repos:
+  - repo: local
+    hooks:
+      - id: count-time
+        name: Count time
+        stages: [push]
+        description: This hook sum the time spent to develop this project
+        entry: go run '.github/scripts/count-time.go'
+        language: system
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files # Prevent giant files from being committed
+      - id: check-merge-conflict # Check for files that contain merge conflict strings
+      - id: check-yaml # Check YAML files for parseable syntax
+      - id: detect-private-key # Detect the presence of private keys
+      - id: end-of-file-fixer # Ensures that files end with a newline
+      - id: trailing-whitespace # Trims trailing whitespace
+
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v3.29.1
     hooks:
