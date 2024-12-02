@@ -50,4 +50,4 @@ Inputs should not be pushed to the repository, so they are ignored in the `.giti
 
 ## Total time spent
 
-- Total time spent: 2 hours 20 minutes
+- Total time spent: 5 hours 20 minutes

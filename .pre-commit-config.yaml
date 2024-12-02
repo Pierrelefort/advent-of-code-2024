@@ -3,7 +3,6 @@ repos:
     hooks:
       - id: count-time
         name: Count time
-        stages: [push]
         description: This hook sum the time spent to develop this project
         entry: go run '.github/scripts/count-time.go'
         language: system
