@@ -1,4 +1,4 @@
-package main
+package day01
 
 import (
 	"advent-of-code/utils"
@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func day01a(inputPath string) int {
+func Day01a(inputPath string) int {
 	fileLines, err := utils.ReadLines(inputPath)
 	if err != nil {
 		fmt.Println(err)
@@ -40,7 +40,7 @@ func day01a(inputPath string) int {
 	return sum
 }
 
-func day01b(inputPath string) int {
+func Day01b(inputPath string) int {
 	fileLines, err := utils.ReadLines(inputPath)
 	if err != nil {
 		fmt.Println(err)
@@ -70,15 +70,4 @@ func day01b(inputPath string) int {
 	}
 
 	return sum
-}
-
-func main() {
-	inputPath01a := "inputs/input01a.txt"
-	resDay01a := day01a(inputPath01a)
-	fmt.Println("Result 01a:", resDay01a)
-
-	inputPath01b := "inputs/input01b.txt"
-	resDay01b := day01b(inputPath01b)
-	fmt.Println("Result 01b:", resDay01b)
-
 }

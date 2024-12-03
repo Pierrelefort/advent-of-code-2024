@@ -3,26 +3,40 @@ package utils
 import (
 	"bufio"
 	"os"
+	"path/filepath"
+	"runtime"
 	"strconv"
+)
+
+var (
+	_, b, _, _ = runtime.Caller(0)
+	Root       = filepath.Join(filepath.Dir(b), "..")
 )
 
 func ReadLines(pathFile string) ([]string, error) {
 	readFile, err := os.Open(pathFile)
-	var fileLines []string
-
 	if err != nil {
-		return fileLines, err
+		return make([]string, 0), err
 	}
 	defer readFile.Close()
 
 	fileScanner := bufio.NewScanner(readFile)
 	fileScanner.Split(bufio.ScanLines)
 
+	var fileLines []string
 	for fileScanner.Scan() {
 		fileLines = append(fileLines, fileScanner.Text())
 	}
 
 	return fileLines, nil
+}
+
+func PathToString(pathFile string) (string, error) {
+	b, err := os.ReadFile(pathFile)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
 
 func RemoveIndex(arr []int, index int) []int {

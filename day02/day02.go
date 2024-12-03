@@ -1,8 +1,7 @@
-package main
+package day02
 
 import (
 	"advent-of-code/utils"
-	"fmt"
 	"strings"
 )
 
@@ -33,7 +32,7 @@ func checks(list []int) bool {
 	return true
 }
 
-func day02a(pathFile string) (int, error) {
+func Day02a(pathFile string) (int, error) {
 	fileLines, err := utils.ReadLines(pathFile)
 	if err != nil {
 		return -1, err
@@ -55,7 +54,7 @@ func day02a(pathFile string) (int, error) {
 	return count, nil
 }
 
-func day02b(pathFile string) (int, error) {
+func Day02b(pathFile string) (int, error) {
 	fileLines, err := utils.ReadLines(pathFile)
 	if err != nil {
 		return -1, err
@@ -92,41 +91,4 @@ func day02b(pathFile string) (int, error) {
 	}
 
 	return count, nil
-}
-
-func main() {
-	inputPathTest := "inputs/input02a_test.txt"
-	resTestA, err := day02a(inputPathTest)
-	if err != nil {
-		fmt.Println("Error result a:", err)
-	}
-	expectedResult := 2
-	if resTestA != expectedResult {
-		fmt.Println("Error in test result a:", resTestA)
-	}
-
-	inputPathA := "inputs/input02a.txt"
-	resA, err := day02a(inputPathA)
-	if err != nil {
-		fmt.Println("Error result a:", err)
-	}
-	fmt.Println("Result a:", resA)
-
-	inputPathTest = "inputs/input02b_test.txt"
-	resTestB, err := day02b(inputPathTest)
-	if err != nil {
-		fmt.Println("Error result b:", err)
-	}
-	expectedResult = 4
-	if resTestB != expectedResult {
-		fmt.Println("Error in test result b:", resTestB)
-	}
-
-	inputPathB := "inputs/input02b.txt"
-	resB, err := day02b(inputPathB)
-	if err != nil {
-		fmt.Println("Error result b:", err)
-	}
-	fmt.Println("Result b:", resB)
-
 }

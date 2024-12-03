@@ -5,7 +5,8 @@ repos:
         name: Count time
         description: This hook sum the time spent to develop this project
         entry: go run '.github/scripts/count-time.go'
-        language: system
+        pass_filenames: false
+        language: golang
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
