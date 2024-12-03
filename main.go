@@ -6,62 +6,56 @@ import (
 	"advent-of-code/day03"
 	"advent-of-code/utils"
 	"fmt"
+	"os"
+	"strconv"
+
+	"golang.org/x/exp/maps"
 )
 
 func main() {
-	inputPath01a := utils.Root + "/inputs/01a.txt"
-	resDay01a := day01.Day01a(inputPath01a)
-	fmt.Println("Result 01a:", resDay01a)
+	var err error
+	var dayNumberString string
 
-	inputPath01b := utils.Root + "/inputs/01b.txt"
-	resDay01b := day01.Day01b(inputPath01b)
-	fmt.Println("Result 01b:", resDay01b)
-
-	inputPathTest := utils.Root + "/inputs/02a_test.txt"
-	resTestA, err := day02.Day02a(inputPathTest)
-	if err != nil {
-		fmt.Println("Error result a:", err)
-	}
-	expectedResult := 2
-	if resTestA != expectedResult {
-		fmt.Println("Error in test result a:", resTestA)
+	functionMap := map[int][]func(string) (int, error){
+		1: {day01.Day01a, day01.Day01b},
+		2: {day02.Day02a, day02.Day02b},
+		3: {day03.Day03a, day03.Day03b},
 	}
 
-	inputPathA := utils.Root + "/inputs/02a.txt"
-	resA, err := day02.Day02a(inputPathA)
-	if err != nil {
-		fmt.Println("Error result a:", err)
+	dayNumber := 3
+	fmt.Printf("Enter day number (default:%d, available %v): ", dayNumber, maps.Keys(functionMap))
+	_, err = fmt.Scanln(&dayNumberString)
+	// Error of Scanln include '\n' so if an error occurs just go with default
+	if err == nil && dayNumberString != "" {
+		dayNumber, err = strconv.Atoi(dayNumberString)
+		if err != nil {
+			fmt.Printf("Invalid value, cannot convert %s to a number\n", dayNumberString)
+		}
 	}
-	fmt.Println("Result a:", resA)
+	fmt.Printf("Launching Day%02d functions\n", dayNumber)
 
-	inputPathTest = utils.Root + "/inputs/02b_test.txt"
-	resTestB, err := day02.Day02b(inputPathTest)
-	if err != nil {
-		fmt.Println("Error result b:", err)
-	}
-	expectedResult = 4
-	if resTestB != expectedResult {
-		fmt.Println("Error in test result b:", resTestB)
-	}
-
-	inputPathB := utils.Root + "/inputs/02b.txt"
-	resB, err := day02.Day02b(inputPathB)
-	if err != nil {
-		fmt.Println("Error result b:", err)
-	}
-	fmt.Println("Result b:", resB)
-
-	pathFile := utils.Root + "/inputs/03a.txt"
-	result, err := day03.Day03a(pathFile)
-	if err != nil {
+	functionList, ok := functionMap[dayNumber]
+	if !ok {
+		fmt.Printf("Missing functions for this day%02d\n", dayNumber)
 		return
 	}
-	fmt.Println(result)
 
-	pathFile = utils.Root + "/inputs/03b.txt"
-	result, err = day03.Day03b(pathFile)
-	if err != nil {
-		return
+	listVersion := []string{"a", "b"}
+	for i := 0; i < len(listVersion); i++ {
+		letter := listVersion[i]
+		inputPath := utils.Root + fmt.Sprintf("/inputs/%02d%s.txt", dayNumber, letter)
+		if _, err := os.Stat(inputPath); err != nil {
+			fmt.Printf("File %s does not exist\n", inputPath)
+			continue
+		}
+
+		if i >= len(functionList) {
+			fmt.Printf("Missing function Day%02d%s\n", dayNumber, letter)
+			continue
+		}
+		functionDay := functionList[i]
+
+		result, err := functionDay(inputPath)
+		fmt.Printf("Day%02d%s returned %d, %v\n", dayNumber, letter, result, err)
 	}
-	fmt.Println(result)
 }

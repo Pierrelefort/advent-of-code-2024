@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func Day01a(inputPath string) int {
+func Day01a(inputPath string) (int, error) {
 	fileLines, err := utils.ReadLines(inputPath)
 	if err != nil {
 		fmt.Println(err)
@@ -37,10 +37,10 @@ func Day01a(inputPath string) int {
 		sum += utils.Abs(currDiff)
 	}
 
-	return sum
+	return sum, nil
 }
 
-func Day01b(inputPath string) int {
+func Day01b(inputPath string) (int, error) {
 	fileLines, err := utils.ReadLines(inputPath)
 	if err != nil {
 		fmt.Println(err)
@@ -69,5 +69,5 @@ func Day01b(inputPath string) int {
 		sum += currValue
 	}
 
-	return sum
+	return sum, nil
 }
