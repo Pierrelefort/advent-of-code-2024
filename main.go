@@ -57,4 +57,11 @@ func main() {
 		return
 	}
 	fmt.Println(result)
+
+	pathFile = utils.Root + "/inputs/03b.txt"
+	result, err = day03.Day03b(pathFile)
+	if err != nil {
+		return
+	}
+	fmt.Println(result)
 }
